@@ -48,7 +48,7 @@ const WeatherScreen = () => {
                 (error) => {
                     showAlert(error);
                 },
-                { enableHighAccuracy: true, timeout: 10000, maximumAge: 1000 }
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 200 }
             );
         };
 
@@ -236,7 +236,7 @@ const WeatherScreen = () => {
                 )}
             </View>
 
-            <ScrollView style={styles.detailWeather} showsVerticalScrollIndicator={false} style={{ width: wp(92) }}>
+            <ScrollView style={styles.detailWeather} showsVerticalScrollIndicator={false}>
                 {/* Thông tin thời tiết hàng giờ */}
                 <View>
                     <FlatList
@@ -451,7 +451,8 @@ const styles = StyleSheet.create({
     },
     detailWeather: {
         height: 'auto',
-        flex: 1
+        flex: 1,
+        width: wp(92)
     },
     viewDailyForecast: {
         borderRadius: 10,

@@ -1,18 +1,59 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Alert, Linking } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 import { hp, wp } from '../../../helpers/common';
 import { theme } from '../../../constants/theme';
+import { launchImageLibrary } from 'react-native-image-picker';
+import RNQRGenerator from 'rn-qr-generator';
 
 const QRCodeScannerScreen = ({ navigation }) => {
     const handleQRCodeRead = ({ data }) => {
-        console.log("Mã Khi Quét:", data);
+        console.log("Mã quét được:", data);
         navigation.navigate('profilestatus', { qrData: data });
     };
 
     const handleCancelPress = () => {
         navigation.goBack();
+    };
+
+    // const openMoMoWithQRData = (qrData) => {
+    //     const momoDeeplink = `momo://app?action=payWithApp&isScanQR=true&qr=${encodeURIComponent(qrData)}`;
+
+    //     Linking.openURL(momoDeeplink)
+    //         .catch(err => console.error('Không thể mở MoMo:', err));
+    // };
+
+    const openLibraryImage = () => {
+        launchImageLibrary({ mediaType: 'photo' }, response => {
+            if (response.didCancel) {
+                console.log('Hủy chọn ảnh từ thư viện');
+            } else if (response.errorCode) {
+                console.log('ImagePicker Error: ', response.errorMessage);
+            } else {
+                console.log('URI hình ảnh được chọn: ', response.assets?.[0]?.uri);
+                const imagePath = response.assets?.[0]?.uri;
+                RNQRGenerator.detect({ uri: imagePath })
+                    .then(result => {
+                        const { values } = result;
+                        if (values?.length > 0) {
+                            const qrData = values[0]; // Extract the first detected QR code value
+                            console.log("Mã quét được:", qrData)
+                            // openMoMoWithQRData(qrData)
+                            navigation.navigate('profilestatus', { qrData }); // Pass the detected QR code data to ProfileStatusScreen
+                        } else {
+                            console.log('Không tìm thấy mã QR Code');
+                            Alert.alert(
+                                'Thông báo',
+                                'Không tìm thấy mã QR Code từ hình ảnh đã chọn'
+                            )
+                        }
+                    })
+                    .catch(error => {
+                        console.log('Error:', error);
+                    });
+            }
+        });
     };
 
     return (
@@ -35,6 +76,10 @@ const QRCodeScannerScreen = ({ navigation }) => {
             />
             <TouchableOpacity style={styles.cancelButtonContainer} onPress={handleCancelPress}>
                 <Image style={styles.cancelButton} source={require('../../../assets/images/close.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.pickImageButtonContainer} onPress={openLibraryImage}>
+                <Image source={require('../../../assets/images/qr-code-white.png')} style={{ height: 30, width: 30, marginRight: '5%' }} />
+                <Text style={styles.pickImageButtonText}>Chọn hình QR Code có sẵn</Text>
             </TouchableOpacity>
             <View style={styles.topContent}>
                 <Text style={styles.topText}>Hướng camera về phía mã QR</Text>
@@ -121,7 +166,23 @@ const styles = StyleSheet.create({
     },
     cancelButton: {
         height: wp(4),
-        width: wp(4)
+        width: wp(4),
+    },
+    pickImageButtonContainer: {
+        flexDirection: 'row',
+        position: 'absolute',
+        bottom: hp(5),
+        backgroundColor: theme.colors.neutral(0.15),
+        padding: 10,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+
+    },
+    pickImageButtonText: {
+        color: 'white',
+        fontSize: hp(1.8),
+        textAlign: 'center',
     },
 });
 

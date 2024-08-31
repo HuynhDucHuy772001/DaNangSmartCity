@@ -194,7 +194,7 @@ const Home = ({ navigation }) => {
 
                 <View style={{ marginHorizontal: "5%", marginTop: "2%" }}>
                     <Marquee spacing={80} speed={0.6}>
-                        <Text style={{ fontSize: hp(1.8), color: 'black' }}>
+                        <Text style={{ fontSize: hp(1.6), color: 'black' }}>
                             "Khoa học, công nghệ và đổi mới sáng tạo - khơi dậy khát vọng, kiến tạo tương lại, nâng cao tiềm lực và vị thế quốc gia"
                         </Text>
                     </Marquee>

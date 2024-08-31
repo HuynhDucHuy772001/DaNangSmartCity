@@ -5,7 +5,7 @@ import { theme } from '../../../constants/theme';
 import { fetchDataMaHoSoFromAPI } from '../../../API/api';
 
 const ProfileStatusScreen = ({ navigation, route }) => {
-    const [qrData, setQrData] = useState(route.params?.qrData || null);
+    // const [qrData, setQrData] = useState(route.params?.qrData || null);
     const [hoSoInfo, setHoSoInfo] = useState(null);
     const [hasScanned, setHasScanned] = useState(false);
 
@@ -16,7 +16,7 @@ const ProfileStatusScreen = ({ navigation, route }) => {
     const formatDate = (timestamp) => {
         const date = new Date(timestamp);
         const day = date.getDate().toString().padStart(2, '0');
-        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-based
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
         const year = date.getFullYear();
         return `${day}/${month}/${year}`;
     };
@@ -48,6 +48,11 @@ const ProfileStatusScreen = ({ navigation, route }) => {
         fetchData();
     }, [route.params?.qrData]);
 
+    const handlePayment = () => {
+        // Implement payment logic here
+        console.log('Payment initiated');
+    };
+
     return (
         <SafeAreaView style={{ flex: 1, marginBottom: hp(8) }}>
             <View style={styles.container_heading}>
@@ -66,7 +71,7 @@ const ProfileStatusScreen = ({ navigation, route }) => {
 
                     {/* Nút bấm quét mã QR */}
                     <TouchableOpacity style={styles.scanButton} onPress={handleScanQRCode}>
-                        <Text style={styles.scanButtonText}>Quét mã QR</Text>
+                        <Text style={styles.scanButtonText}>Quét mã QR trên hồ sơ để tra cứu</Text>
                     </TouchableOpacity>
 
                     {hoSoInfo && !hoSoInfo.error ? (
@@ -87,6 +92,23 @@ const ProfileStatusScreen = ({ navigation, route }) => {
                             <Text style={styles.qrDataText}>Ngày tiếp nhận: {formatDate(hoSoInfo.ngay_tiep_nhan)}</Text>
                             <Text style={styles.qrDataText}>Ngày hẹn trả kết quả: {formatDate(hoSoInfo.ngay_hen_tra_ket_qua)}</Text>
                             <Text style={styles.qrDataText}>Ngày trả thực tế: {formatDate(hoSoInfo.ngay_tra_thuc_te)}</Text>
+
+                            {(parseFloat(hoSoInfo.phi) > 0 || parseFloat(hoSoInfo.le_phi) > 0) && (
+                                <TouchableOpacity
+                                    style={[styles.paymentButton, { opacity: 1 }]}
+                                    onPress={handlePayment}
+                                >
+                                    <Text style={styles.paymentButtonText}>Thanh toán</Text>
+                                </TouchableOpacity>
+                            )}
+                            {(parseFloat(hoSoInfo.phi) === 0 && parseFloat(hoSoInfo.le_phi) === 0) && (
+                                <TouchableOpacity
+                                    style={styles.paymentButtonNoActive}
+                                    disabled={true}
+                                >
+                                    <Text style={styles.paymentButtonText}>Thanh toán</Text>
+                                </TouchableOpacity>
+                            )}
                         </View>
                     ) : (
                         hasScanned && (
@@ -117,7 +139,7 @@ const styles = StyleSheet.create({
         fontSize: hp(2),
         textAlign: 'center',
         color: 'white',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     containerLookup: {
         backgroundColor: 'white',
@@ -138,11 +160,11 @@ const styles = StyleSheet.create({
         fontSize: hp(2),
         color: 'black',
         textAlign: 'center',
-        marginTop: '2%'
+        marginTop: '2%',
     },
     scanButton: {
         backgroundColor: theme.colors.main,
-        paddingVertical: hp(2),
+        paddingVertical: hp(1.5),
         borderRadius: 10,
         alignItems: 'center',
         marginBottom: hp(4),
@@ -151,13 +173,13 @@ const styles = StyleSheet.create({
     scanButtonText: {
         color: '#FFFFFF',
         fontSize: hp(2),
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     resultsTitle: {
         marginHorizontal: '5%',
         fontSize: hp(2),
         color: 'black',
-        marginBottom: hp(2)
+        marginBottom: hp(2),
     },
     noResultsText: {
         marginHorizontal: '5%',
@@ -182,7 +204,28 @@ const styles = StyleSheet.create({
     linkButtonText: {
         color: '#FFFFFF',
         fontSize: hp(2),
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+    },
+    paymentButton: {
+        backgroundColor: theme.colors.main,
+        paddingVertical: hp(1.5),
+        borderRadius: 10,
+        alignItems: 'center',
+        marginTop: hp(2),
+        marginHorizontal: '5%',
+    },
+    paymentButtonText: {
+        color: '#FFFFFF',
+        fontSize: hp(1.8),
+        fontWeight: 'bold',
+    },
+    paymentButtonNoActive: {
+        backgroundColor: '#B0B0B0',
+        paddingVertical: hp(1.5),
+        borderRadius: 10,
+        alignItems: 'center',
+        marginTop: hp(2),
+        marginHorizontal: '5%',
     },
 });
 
