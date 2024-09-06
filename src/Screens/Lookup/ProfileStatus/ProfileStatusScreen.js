@@ -10,7 +10,7 @@ const ProfileStatusScreen = ({ navigation, route }) => {
     const [hasScanned, setHasScanned] = useState(false);
 
     const handleScanQRCode = () => {
-        navigation.navigate('QRCodeScannerScreen');
+        navigation.navigate('qrcodescannerscreen');
     };
 
     const formatDate = (timestamp) => {
@@ -26,7 +26,7 @@ const ProfileStatusScreen = ({ navigation, route }) => {
             const apiData = await fetchDataMaHoSoFromAPI();
 
             if (route.params?.qrData) {
-                const tachMaHoSo = route.params?.qrData.split("=");
+                const tachMaHoSo = route.params?.qrData.split('=');
                 const maHoSo = tachMaHoSo[1]?.trim();
 
                 // Tìm kiếm thông tin hồ sơ trùng khớp
@@ -49,6 +49,7 @@ const ProfileStatusScreen = ({ navigation, route }) => {
     }, [route.params?.qrData]);
 
     const handlePayment = () => {
+        navigation.navigate('paymentscanner');
         // Implement payment logic here
         console.log('Payment initiated');
     };
@@ -57,7 +58,7 @@ const ProfileStatusScreen = ({ navigation, route }) => {
         <SafeAreaView style={{ flex: 1, marginBottom: hp(8) }}>
             <View style={styles.container_heading}>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ justifyContent: 'flex-start', position: 'absolute', left: wp(4) }}>
-                    <Image source={require("../../../assets/images/back.png")} style={{ width: wp(4), height: wp(4) }} />
+                    <Image source={require('../../../assets/images/back.png')} style={{ width: wp(4), height: wp(4) }} />
                 </TouchableOpacity>
                 <View style={{ alignSelf: 'center' }}>
                     <Text style={styles.heading} numberOfLines={1}>Tra cứu thông tin tình trạng hồ sơ</Text>
@@ -104,7 +105,8 @@ const ProfileStatusScreen = ({ navigation, route }) => {
                             {(parseFloat(hoSoInfo.phi) === 0 && parseFloat(hoSoInfo.le_phi) === 0) && (
                                 <TouchableOpacity
                                     style={styles.paymentButtonNoActive}
-                                    disabled={true}
+                                    onPress={handlePayment}
+                                // disabled={true}
                                 >
                                     <Text style={styles.paymentButtonText}>Thanh toán</Text>
                                 </TouchableOpacity>
@@ -167,7 +169,7 @@ const styles = StyleSheet.create({
         paddingVertical: hp(1.5),
         borderRadius: 10,
         alignItems: 'center',
-        marginBottom: hp(4),
+        marginBottom: hp(2),
         marginHorizontal: '5%',
     },
     scanButtonText: {
@@ -205,6 +207,10 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: hp(2),
         fontWeight: 'bold',
+    },
+    qrDataContainer: {
+        paddingBottom: hp(2),
+        paddingTop: hp(2),
     },
     paymentButton: {
         backgroundColor: theme.colors.main,

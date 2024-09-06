@@ -5,7 +5,7 @@ import { hp, wp } from '../../helpers/common';
 
 const HourlyForecastItem = ({ item, index, convertFtoC }) => {
     const formatTime = (timestamp) => {
-        const date = new Date(timestamp * 1000); // Convert Unix timestamp to milliseconds
+        const date = new Date(timestamp * 1000);
         const hours = date.getHours();
         return `${hours} : 00`;
     };
@@ -31,15 +31,15 @@ const styles = StyleSheet.create({
     time: {
         color: 'white',
         fontSize: hp(1.6),
-        fontFamily: 'Inter-Black'
+        fontFamily: 'Inter-Black',
     },
     icon: {
         height: wp(11),
-        width: wp(11)
+        width: wp(11),
     },
     temp: {
         color: 'white',
-        fontFamily: 'Inter-Black'
+        fontFamily: 'Inter-Black',
     }
 })
 

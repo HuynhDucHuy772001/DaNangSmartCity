@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ActivityIndicator, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { theme } from '../../../constants/theme';
@@ -25,11 +25,9 @@ function ListEvents() {
     const [range, setRange] = useState({ startDate: undefined, endDate: undefined });
     const [open, setOpen] = useState(false);
 
-    const onDismiss = () => setOpen(false);
-
     const [costValue, setCostValue] = useState(null);
 
-    const categoryList = [
+    const categoryList = useMemo(() => [
         { id: 1, name: 'Tất cả' },
         { id: 2, name: 'Lễ hội truyền thống' },
         { id: 3, name: 'Thể thao' },
@@ -37,34 +35,34 @@ function ListEvents() {
         { id: 5, name: 'Chính trị - Ngoại giao' },
         { id: 6, name: 'Hội thảo chuyên ngành' },
         { id: 7, name: 'Khác' }
-    ];
+    ], []);
 
-    const costOptions = [
+    const costOptions = useMemo(() => [
         { label: 'Có phí', value: '1' },
         { label: 'Miễn phí', value: '2' },
-    ];
+    ], []);
 
-    function removeDiacritics(str) {
-        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    }
+    const removeDiacritics = useCallback((str) => {
+        return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }, []);
 
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         try {
             const apiData = await fetchDataEventsFromAPI();
-            setData(apiData); // Cập nhật dữ liệu hiện tại
-            setOriginData(apiData); // Cập nhật dữ liệu gốc
+            setData(apiData);
+            setOriginData(apiData);
             setIsLoading(false);
         } catch (error) {
             console.log('Lỗi khi gọi API:', error);
             setIsLoading(false);
         }
-    };
+    }, []);
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [fetchData]);
 
-    const onRefresh = () => {
+    const onRefresh = useCallback(() => {
         setRefreshing(true);
         fetchData();
         setActive(1);
@@ -72,41 +70,32 @@ function ListEvents() {
         setRange({ startDate: undefined, endDate: undefined });
         setSearchText('');
         setCostValue(null);
-    };
+    }, [fetchData]);
 
-    const handleSearch = (text) => {
+    const handleSearch = useCallback((text) => {
         setSearchText(text);
-        filterEvents();
-    };
+    }, []);
 
-    const onCategoryClick = (id) => {
+    const onCategoryClick = useCallback((id) => {
         setActive(id);
-        filterEvents();
-    };
+    }, []);
 
-    const handleCostChange = (value) => {
-        if (costValue === value) {
-            setCostValue(null);
-        } else {
-            setCostValue(value);
-        }
-        filterEvents();
-    };
+    const handleCostChange = useCallback((value) => {
+        setCostValue(prev => prev === value ? null : value);
+    }, []);
 
-    const onConfirm = ({ startDate, endDate }) => {
+    const onConfirm = useCallback(({ startDate, endDate }) => {
         setOpen(false);
         setRange({ startDate, endDate });
-    };
+    }, []);
 
-    const filterEvents = () => {
+    const filterEvents = useCallback(() => {
         let filteredEvents = originData;
 
-        //Kiểm tra lĩnh lực
         if (active !== 1) {
             filteredEvents = filteredEvents.filter(event => event.linh_vuc === categoryList[active - 1].name);
         }
 
-        //Kiểm tra khoảng thời gian
         if (range.startDate && range.endDate) {
             filteredEvents = filteredEvents.filter(event => {
                 const eventDate = new Date(event.ngay_dien_ra_su_kien);
@@ -114,7 +103,6 @@ function ListEvents() {
             });
         }
 
-        //Kiểm tra chi phí
         if (costValue) {
             filteredEvents = filteredEvents.filter(event => {
                 if (costValue === '2') {
@@ -126,7 +114,6 @@ function ListEvents() {
             });
         }
 
-        //Tìm kiếm
         if (searchText) {
             const keywordWithoutDiacritics = removeDiacritics(searchText.toLowerCase());
             filteredEvents = filteredEvents.filter((event) => {
@@ -136,39 +123,37 @@ function ListEvents() {
         }
 
         setData(filteredEvents);
-    };
+    }, [originData, active, range.startDate, range.endDate, costValue, searchText, categoryList, removeDiacritics]);
 
     useEffect(() => {
         filterEvents();
-    }, [active, range.startDate, range.endDate, costValue, searchText]);
+    }, [filterEvents]);
 
-    const formatDate = (dateString) => {
+    const formatDate = useCallback((dateString) => {
         const date = moment(dateString);
-
         const day = date.date();
         const month = date.month() + 1;
         const year = date.year();
-
         return `${day < 10 ? '0' : ''}${day}/${month < 10 ? '0' : ''}${month}/${year}`;
-    };
+    }, []);
 
-    const clearFilter = () => {
+    const clearFilter = useCallback(() => {
         fetchData();
         setActive(1);
         setRange({ startDate: undefined, endDate: undefined });
         setSearchText('');
         setCostValue(null);
-    };
+    }, [fetchData]);
 
-    const close = require('../../../assets/images/cancel.png')
-    const change = require('../../../assets/images/change.png')
+    const close = require('../../../assets/images/cancel.png');
+    const change = require('../../../assets/images/change.png');
 
     return (
-        <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
+        <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
             <View style={styles.container_heading}>
                 <View style={{ width: width * 0.1 }}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Image source={require("../../../assets/images/back.png")} style={{ width: wp(4), height: wp(4) }} />
+                        <Image source={require('../../../assets/images/back.png')} style={{ width: wp(4), height: wp(4) }} />
                     </TouchableOpacity>
                 </View>
                 <View style={{ width: width * 0.74 }}>
@@ -184,7 +169,6 @@ function ListEvents() {
             />
 
             <View style={{ flexDirection: 'row' }}>
-                {/* Chọn khoảng thời gian diễn ra sự kiện */}
                 <TouchableOpacity onPress={() => setOpen(true)} uppercase={false} style={styles.buttonSelectRangeDate}>
                     <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                         <Image source={require('../../../assets/images/calendar1.png')} style={{ height: wp(5), width: wp(5) }} />
@@ -198,7 +182,6 @@ function ListEvents() {
                         )}
                     </View>
                 </TouchableOpacity>
-                {/* Chọn chi phí sự kiện */}
                 <View style={styles.radioButtonGroup}>
                     {costOptions.map(option => (
                         <TouchableOpacity
@@ -213,7 +196,6 @@ function ListEvents() {
                         </TouchableOpacity>
                     ))}
                 </View>
-                {/* Xóa tất cả bộ lọc */}
                 <TouchableOpacity style={styles.clearFilter} onPress={clearFilter}>
                     <Image source={require('../../../assets/images/clear-filter.png')} style={{ width: wp(6), height: wp(6) }} />
                 </TouchableOpacity>
@@ -223,7 +205,7 @@ function ListEvents() {
                 locale="en-GB"
                 mode="range"
                 visible={open}
-                onDismiss={onDismiss}
+                onDismiss={() => setOpen(false)}
                 startDate={range.startDate}
                 endDate={range.endDate}
                 onConfirm={onConfirm}
@@ -232,13 +214,13 @@ function ListEvents() {
                 closeIcon={close}
                 editIcon={change}
                 calendarIcon={change}
-                startLabel='Ngày bắt đầu'
-                endLabel='Ngày kết thúc'
+                startLabel="Ngày bắt đầu"
+                endLabel="Ngày kết thúc"
                 allowEditing={true}
             />
 
             {isLoading ? (
-                <ActivityIndicator size="large" color={theme.colors.main} style={{ marginTop: "50%" }} />
+                <ActivityIndicator size="large" color={theme.colors.main} style={{ marginTop: '50%' }} />
             ) : data.length === 0 ? (
                 <Text style={styles.noDataText}>Không có sự kiện bạn tìm kiếm</Text>
             ) : (
@@ -251,7 +233,7 @@ function ListEvents() {
                     fetchData={fetchData}
                 />
             )}
-        </SafeAreaView >
+        </SafeAreaView>
     );
 }
 
@@ -270,36 +252,35 @@ const styles = StyleSheet.create({
         fontSize: hp(2),
         fontWeight: theme.fontWeights.semibold,
         color: theme.colors.white,
-        textAlign: 'center'
+        textAlign: 'center',
     },
     buttonSelectRangeDate: {
         backgroundColor: theme.colors.white,
-        marginTop: "2%",
-        marginBottom: "2%",
+        marginTop: '2%',
+        marginBottom: '2%',
         width: wp(62),
-        marginLeft: "1.5%",
+        marginLeft: '1.5%',
         borderRadius: 10,
         borderWidth: 1,
         borderColor: '#C9C9C9',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     radioButtonGroup: {
         flexDirection: 'column',
         justifyContent: 'space-between',
-        marginTop: "2%",
-        marginBottom: "2%",
-        marginLeft: "1.5%",
+        marginTop: '2%',
+        marginBottom: '2%',
+        marginLeft: '1.5%',
         borderRadius: theme.radius.xs,
         width: wp(23),
-        // alignItems: 'center',
     },
     radioButton: {
         flexDirection: 'row',
     },
     radioButtonText: {
         color: 'black',
-        marginRight: "15%",
-        fontSize: hp(1.8)
+        marginRight: '15%',
+        fontSize: hp(1.8),
     },
     radioCircle: {
         height: wp(4),
@@ -315,28 +296,28 @@ const styles = StyleSheet.create({
         height: wp(2),
         borderRadius: 10,
         backgroundColor: 'black',
-        alignSelf: 'center'
+        alignSelf: 'center',
     },
     clearFilter: {
         width: wp(9),
         backgroundColor: 'white',
-        marginTop: "2%",
-        marginBottom: "2%",
+        marginTop: '2%',
+        marginBottom: '2%',
         borderRadius: 10,
         borderWidth: 1,
         borderColor: '#C9C9C9',
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: "1%"
+        marginLeft: '1%',
     },
     noDataText: {
         fontSize: hp(2),
         color: theme.colors.gray,
         textAlign: 'center',
         backgroundColor: 'white',
-        height: "100%",
-        paddingTop: "50%",
-        fontStyle: 'italic'
+        height: '100%',
+        paddingTop: '50%',
+        fontStyle: 'italic',
     },
 });
 

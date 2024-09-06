@@ -68,13 +68,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     content_list: {
         display: 'flex',
         flex: 1,
-        marginVertical: "1%",
-        marginHorizontal: "2%",
+        marginVertical: '1%',
+        marginHorizontal: '2%',
         backgroundColor: theme.colors.white,
         borderRadius: theme.radius.xx,
         shadowColor: '#000',
@@ -86,32 +86,32 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 5,
         width: wp(96.5),
-        padding: "1%"
+        padding: '1%',
     },
     viewTenVaNgaySinh: {
         flexDirection: 'row',
-        marginVertical: "2%",
-        marginHorizontal: "2%"
+        marginVertical: '2%',
+        marginHorizontal: '2%',
     },
     viewCCCD_DVCT_TDT: {
-        marginVertical: "2%",
-        marginHorizontal: "2%"
+        marginVertical: '2%',
+        marginHorizontal: '2%',
     },
     textHoTen: {
         fontWeight: theme.fontWeights.semibold,
         fontSize: hp(1.9),
-        width: "60%"
+        width: '60%',
     },
     textNgaySinh: {
-        fontSize: hp(1.85)
+        fontSize: hp(1.85),
     },
     textCCCD_DVCT_TDT: {
-        fontSize: hp(1.8)
+        fontSize: hp(1.8),
     },
     textXemChiTiet: {
         fontStyle: 'italic',
         color: theme.colors.main,
-        fontSize: hp(2)
+        fontSize: hp(2),
     }
 })
 

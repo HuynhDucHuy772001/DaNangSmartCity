@@ -21,19 +21,19 @@ const MultiSelectUni = ({ university, setSelectedUniversities }) => {
                 setOpen={() => setIsOpen(!isOpen)}
                 setValue={(val) => setCurrentValue(val)}
                 autoScroll
-                placeholder='Chọn các trường đào tạo cần lọc'
+                placeholder="Chọn các trường đào tạo cần lọc"
                 placeholderStyle={{ fontSize: hp(1.85) }}
                 showArrowIcon={true}
                 multiple={true}
-                mode='BADGE'
+                mode="BADGE"
                 badgeColors={theme.colors.main}
                 badgeDotColors={theme.colors.grayBG}
-                badgeTextStyle={{ color: "white" }}
+                badgeTextStyle={{ color: 'white' }}
                 textStyle={{ fontSize: hp(1.85) }}
                 style={{
                     borderWidth: 0,
                     height: hp(5),
-                    marginBottom: "5%",
+                    marginBottom: '5%',
                     shadowColor: theme.colors.main,
                     shadowOffset: {
                         width: 0,
@@ -61,8 +61,8 @@ const MultiSelectUni = ({ university, setSelectedUniversities }) => {
 
 const styles = StyleSheet.create({
     dropDown: {
-        marginHorizontal: "2%",
-    }
-})
+        marginHorizontal: '2%',
+    },
+});
 
 export default MultiSelectUni;

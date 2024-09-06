@@ -37,7 +37,7 @@ const ListView = () => {
     }, []);
 
     function removeDiacritics(str) {
-        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
 
     const handleSearch = () => {
@@ -91,7 +91,7 @@ const ListView = () => {
         setRefreshing(true);
         fetchData();
         setRefreshing(false);
-        setSearchText("");
+        setSearchText('');
     }
 
     const formatCCCD = (cccd) => {
@@ -101,11 +101,11 @@ const ListView = () => {
     }
 
     return (
-        <View style={{ backgroundColor: "white", flex: 1 }}>
+        <View style={{ backgroundColor: 'white', flex: 1 }}>
             <View style={styles.container_heading}>
                 <View style={{ width: width * 0.1 }}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Image source={require("../../../assets/images/back.png")} style={{ width: wp(4), height: wp(4) }} />
+                        <Image source={require('../../../assets/images/back.png')} style={{ width: wp(4), height: wp(4) }} />
                     </TouchableOpacity>
                 </View>
                 <View style={{ width: width * 0.74 }}>
@@ -123,7 +123,7 @@ const ListView = () => {
             <MultiSelectUni university={university} setSelectedUniversities={setSelectedUniversities} />
 
             {isLoading ? (
-                <ActivityIndicator size="large" color={theme.colors.main} style={{ marginTop: "50%" }} />
+                <ActivityIndicator size="large" color={theme.colors.main} style={{ marginTop: '50%' }} />
             ) : data.length === 0 ? (
                 <Text style={styles.noDataText}>Không có thông tin bạn cần tìm kiếm</Text>
             ) : (
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
         fontSize: hp(2),
         fontWeight: theme.fontWeights.semibold,
         color: theme.colors.white,
-        textAlign: 'center'
+        textAlign: 'center',
     },
 
     noDataText: {
@@ -158,8 +158,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         backgroundColor: 'white',
         height: hp(100),
-        paddingTop: "50%",
-        fontStyle: 'italic'
+        paddingTop: '50%',
+        fontStyle: 'italic',
     },
 });
 

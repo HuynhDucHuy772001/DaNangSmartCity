@@ -140,7 +140,7 @@ const WeatherScreen = () => {
             'Bắc', 'Bắc Đông Bắc', 'Đông Bắc', 'Đông Đông Bắc',
             'Đông', 'Đông Đông Nam', 'Đông Nam', 'Nam Đông Nam',
             'Nam', 'Nam Tây Nam', 'Tây Nam', 'Tây Tây Nam',
-            'Tây', 'Tây Tây Bắc', 'Tây Bắc', 'Bắc Tây Bắc'
+            'Tây', 'Tây Tây Bắc', 'Tây Bắc', 'Bắc Tây Bắc',
         ];
         const index = Math.round((deg % 360) / 22.5) % 16;
         return directions[index];
@@ -207,7 +207,7 @@ const WeatherScreen = () => {
     const statusT = getStatus(iqAir);
 
     return (
-        <ImageBackground source={{ uri: backgroundImage }} style={styles.container} resizeMode='cover'>
+        <ImageBackground source={{ uri: backgroundImage }} style={styles.container} resizeMode="cover">
             <View style={{
                 ...StyleSheet.absoluteFillObject,
                 backgroundColor: 'rgba(0,0,0,0.2)'
@@ -430,66 +430,66 @@ const styles = StyleSheet.create({
     cityName: {
         fontWeight: 'bold',
         fontSize: hp(4),
-        color: 'white'
+        color: 'white',
     },
     icon: {
         height: wp(20),
-        width: wp(20)
+        width: wp(20),
     },
     temp: {
         fontFamily: 'Inter-Black',
         fontSize: hp(8),
-        color: 'white'
+        color: 'white',
     },
     weather: {
         fontSize: hp(2.5),
-        color: 'white'
+        color: 'white',
     },
     tempMinMax: {
         fontSize: hp(2.2),
-        color: 'white'
+        color: 'white',
     },
     detailWeather: {
         height: 'auto',
         flex: 1,
-        width: wp(92)
+        width: wp(92),
     },
     viewDailyForecast: {
         borderRadius: 10,
         backgroundColor: theme.colors.neutral(0.15),
-        marginVertical: "2%"
+        marginVertical: '2%',
     },
     viewSection: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingLeft: "4%",
-        paddingVertical: "2%"
+        paddingLeft: '4%',
+        paddingVertical: '2%',
     },
     iconTitle: {
         width: wp(4),
         height: wp(4),
-        alignSelf: 'center'
+        alignSelf: 'center',
     },
     textTitle: {
         color: 'white',
         fontFamily: 'Inter-ExtraBold',
-        marginLeft: "2%",
-        fontSize: hp(1.5)
+        marginLeft: '2%',
+        fontSize: hp(1.5),
     },
     textTitle2Row: {
         color: 'white',
         fontFamily: 'Inter-ExtraBold',
-        marginLeft: "3%",
-        fontSize: hp(1.5)
+        marginLeft: '3%',
+        fontSize: hp(1.5),
     },
     viewRainAndHumidity: {
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     viewSection2Row: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingLeft: "8%",
-        paddingVertical: "4%"
+        paddingLeft: '8%',
+        paddingVertical: '4%',
     },
     viewAQI: {
         backgroundColor: theme.colors.neutral(0.15),
@@ -499,46 +499,46 @@ const styles = StyleSheet.create({
     viewRain: {
         borderRadius: 10,
         backgroundColor: theme.colors.neutral(0.15),
-        marginBottom: "2%",
+        marginBottom: '2%',
         width: wp(45),
-        marginRight: '2%'
+        marginRight: '2%',
     },
     ViewHumidity: {
         borderRadius: 10,
         backgroundColor: theme.colors.neutral(0.15),
-        marginBottom: "2%",
-        width: wp(45)
+        marginBottom: '2%',
+        width: wp(45),
     },
     textRain: {
         color: 'white',
         fontSize: hp(5),
         paddingLeft: '8%',
-        fontFamily: 'Inter-SemiBold'
+        fontFamily: 'Inter-SemiBold',
     },
     textDetailRain: {
         color: 'white',
         fontSize: hp(1.8),
         paddingHorizontal: '8%',
         fontFamily: 'Inter-Medium',
-        paddingBottom: '2%'
+        paddingBottom: '2%',
     },
     textHumidity: {
         color: 'white',
         fontSize: hp(5),
         paddingLeft: '8%',
-        fontFamily: 'Inter-SemiBold'
+        fontFamily: 'Inter-SemiBold',
     },
     textDetailHumidity: {
         color: 'white',
         fontSize: hp(1.8),
         paddingHorizontal: '8%',
         fontFamily: 'Inter-Medium',
-        paddingBottom: '2%'
+        paddingBottom: '2%',
     },
     viewWind: {
         backgroundColor: theme.colors.neutral(0.15),
         borderRadius: 10,
-        marginBottom: '2%'
+        marginBottom: '2%',
     },
     viewWindChild: {
         flexDirection: 'row',
@@ -548,34 +548,34 @@ const styles = StyleSheet.create({
         fontSize: hp(5),
         paddingLeft: '8%',
         fontFamily: 'Inter-SemiBold',
-        width: wp(19)
+        width: wp(19),
     },
     textGust: {
         color: 'white',
         fontSize: hp(5),
         paddingLeft: '8%',
         fontFamily: 'Inter-SemiBold',
-        width: wp(19)
+        width: wp(19),
     },
     separator: {
         borderBottomColor: theme.colors.neutralW(0.15),
         borderBottomWidth: 0.8,
-        marginLeft: '8%'
+        marginLeft: '8%',
     },
     textKMH: {
         color: 'white',
         fontSize: hp(1.2),
-        fontFamily: 'Inter-Regular'
+        fontFamily: 'Inter-Regular',
     },
     textDetailWind: {
         color: 'white',
         fontSize: hp(1.4),
-        fontFamily: 'Inter-Black'
+        fontFamily: 'Inter-Black',
     },
     compassContainer: {
         alignItems: 'center',
         marginVertical: 10,
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     textWindDeg: {
         color: 'white',
@@ -584,89 +584,89 @@ const styles = StyleSheet.create({
         fontFamily: 'Inter-SemiBold',
     },
     viewFeelLikeAndAmountOfRain: {
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     viewFeelLike: {
         borderRadius: 10,
         backgroundColor: theme.colors.neutral(0.15),
-        marginBottom: "2%",
+        marginBottom: '2%',
         width: wp(45),
-        marginRight: '2%'
+        marginRight: '2%',
     },
     textFeelsLike: {
         color: 'white',
         fontSize: hp(5),
         paddingLeft: '8%',
-        fontFamily: 'Inter-SemiBold'
+        fontFamily: 'Inter-SemiBold',
     },
     textDetailFeelsLike: {
         color: 'white',
         fontSize: hp(1.8),
         paddingHorizontal: '8%',
         fontFamily: 'Inter-Medium',
-        paddingBottom: '2%'
+        paddingBottom: '2%',
     },
     ViewAmountOfRain: {
         borderRadius: 10,
         backgroundColor: theme.colors.neutral(0.15),
-        marginBottom: "2%",
-        width: wp(45)
+        marginBottom: '2%',
+        width: wp(45),
     },
     textAmountOfRain: {
         color: 'white',
         fontSize: hp(5),
         paddingLeft: '8%',
-        fontFamily: 'Inter-SemiBold'
+        fontFamily: 'Inter-SemiBold',
     },
     textDetailAmountOfRain: {
         color: 'white',
         fontSize: hp(1.8),
         paddingHorizontal: '8%',
         fontFamily: 'Inter-Medium',
-        paddingBottom: '2%'
+        paddingBottom: '2%',
     },
     viewSunRise_SunSetAndVision: {
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     viewSunRise_SunSet: {
         borderRadius: 10,
         backgroundColor: theme.colors.neutral(0.15),
-        marginBottom: "2%",
+        marginBottom: '2%',
         width: wp(45),
-        marginRight: '2%'
+        marginRight: '2%',
     },
     textSunRise_SunSet: {
         color: 'white',
         fontSize: hp(5),
         paddingLeft: '8%',
-        fontFamily: 'Inter-SemiBold'
+        fontFamily: 'Inter-SemiBold',
     },
     textDetailSunRise_SunSet: {
         color: 'white',
         fontSize: hp(1.8),
         paddingHorizontal: '8%',
         fontFamily: 'Inter-Medium',
-        paddingBottom: '2%'
+        paddingBottom: '2%',
     },
     viewVision: {
         borderRadius: 10,
         backgroundColor: theme.colors.neutral(0.15),
-        marginBottom: "2%",
+        marginBottom: '2%',
         width: wp(45),
-        marginRight: '2%'
+        marginRight: '2%',
     },
     textVision: {
         color: 'white',
         fontSize: hp(5),
         paddingLeft: '8%',
-        fontFamily: 'Inter-SemiBold'
+        fontFamily: 'Inter-SemiBold',
     },
     textDetailVision: {
         color: 'white',
         fontSize: hp(1.8),
         paddingHorizontal: '8%',
         fontFamily: 'Inter-Medium',
-        paddingBottom: '2%'
+        paddingBottom: '2%',
     },
 });
 

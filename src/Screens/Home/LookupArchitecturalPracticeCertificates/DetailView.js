@@ -26,11 +26,11 @@ const DetailView = () => {
     }
 
     return (
-        <View style={{ backgroundColor: "white", flex: 1 }}>
+        <View style={{ backgroundColor: 'white', flex: 1 }}>
             <View style={styles.container_heading}>
                 <View style={{ width: width * 0.1 }}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Image source={require("../../../assets/images/back.png")} style={{ width: wp(4), height: wp(4) }} />
+                        <Image source={require('../../../assets/images/back.png')} style={{ width: wp(4), height: wp(4) }} />
                     </TouchableOpacity>
                 </View>
                 <View style={{ width: width * 0.74 }}>
@@ -91,48 +91,48 @@ const styles = StyleSheet.create({
         fontSize: hp(2),
         fontWeight: theme.fontWeights.semibold,
         color: theme.colors.white,
-        textAlign: 'center'
+        textAlign: 'center',
     },
     tiltle: {
         fontSize: hp(2.4),
-        marginHorizontal: "2%",
-        marginVertical: "2%",
-        fontWeight: theme.fontWeights.bold
+        marginHorizontal: '2%',
+        marginVertical: '2%',
+        fontWeight: theme.fontWeights.bold,
     },
     viewTenVaNgaySinh: {
         flexDirection: 'row',
-        marginVertical: "2%",
-        marginHorizontal: "2%",
-        alignContent: 'center'
+        marginVertical: '2%',
+        marginHorizontal: '2%',
+        alignContent: 'center',
     },
     viewCCCD_DVCT_LVC_TDCM_GC: {
-        marginVertical: "2%",
-        marginHorizontal: "2%"
+        marginVertical: '2%',
+        marginHorizontal: '2%',
     },
     textHoTen: {
         fontWeight: theme.fontWeights.semibold,
         fontSize: hp(2.1),
-        width: "58%"
+        width: '58%',
     },
     textNgaySinh: {
         fontSize: hp(2),
-        textNgaySinh: "38%",
+        textNgaySinh: '38%',
     },
     textCCCD_DVCT_LVC_TDCM_GC: {
         fontSize: hp(2),
     },
     viewTDT_HDT: {
         flexDirection: 'row',
-        marginVertical: "2%",
-        marginHorizontal: "2%"
+        marginVertical: '2%',
+        marginHorizontal: '2%',
     },
     textTDT: {
         fontSize: hp(2),
-        width: "60%"
+        width: '60%',
     },
     textHDT: {
         fontSize: hp(2),
-    }
+    },
 })
 
 export default DetailView;

@@ -1,59 +1,40 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Alert, Linking } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Linking, Alert, Image } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 import { hp, wp } from '../../../helpers/common';
 import { theme } from '../../../constants/theme';
-import { launchImageLibrary } from 'react-native-image-picker';
-import RNQRGenerator from 'rn-qr-generator';
 
-const QRCodeScannerScreen = ({ navigation }) => {
+const PaymentScanner = ({ navigation }) => {
+    const [scanned, setScanned] = useState(false);
+
     const handleQRCodeRead = ({ data }) => {
-        console.log('Mã quét được:', data);
-        navigation.navigate('profilestatus', { qrData: data });
+        if (scanned) return;
+        setScanned(true);
+
+        // Assuming the QR code contains a MoMo payment link
+        const momoDeeplink = `momo://app?action=payWithApp&isScanQR=true&qr=${encodeURIComponent(data)}`;
+
+        Linking.canOpenURL(momoDeeplink).then(supported => {
+            if (supported) {
+                Linking.openURL(momoDeeplink);
+            } else {
+                Alert.alert(
+                    'Không thể mở MoMo',
+                    'Vui lòng cài đặt ứng dụng MoMo để tiếp tục thanh toán.',
+                    [
+                        { text: 'OK', onPress: () => setScanned(false) }
+                    ]
+                );
+            }
+        }).catch(err => {
+            console.error('An error occurred', err);
+            setScanned(false);
+        });
     };
 
     const handleCancelPress = () => {
         navigation.goBack();
-    };
-
-    // const openMoMoWithQRData = (qrData) => {
-    //     const momoDeeplink = `momo://app?action=payWithApp&isScanQR=true&qr=${encodeURIComponent(qrData)}`;
-
-    //     Linking.openURL(momoDeeplink)
-    //         .catch(err => console.error('Không thể mở MoMo:', err));
-    // };
-
-    const openLibraryImage = () => {
-        launchImageLibrary({ mediaType: 'photo' }, response => {
-            if (response.didCancel) {
-                console.log('Hủy chọn ảnh từ thư viện');
-            } else if (response.errorCode) {
-                console.log('ImagePicker Error: ', response.errorMessage);
-            } else {
-                console.log('URI hình ảnh được chọn: ', response.assets?.[0]?.uri);
-                const imagePath = response.assets?.[0]?.uri;
-                RNQRGenerator.detect({ uri: imagePath })
-                    .then(result => {
-                        const { values } = result;
-                        if (values?.length > 0) {
-                            const qrData = values[0];
-                            console.log('Mã quét được:', qrData)
-                            // openMoMoWithQRData(qrData)
-                            navigation.navigate('profilestatus', { qrData });
-                        } else {
-                            console.log('Không tìm thấy mã QR Code');
-                            Alert.alert(
-                                'Thông báo',
-                                'Không tìm thấy mã QR Code từ hình ảnh đã chọn'
-                            )
-                        }
-                    })
-                    .catch(error => {
-                        console.log('Error:', error);
-                    });
-            }
-        });
     };
 
     return (
@@ -77,23 +58,18 @@ const QRCodeScannerScreen = ({ navigation }) => {
             <TouchableOpacity style={styles.cancelButtonContainer} onPress={handleCancelPress}>
                 <Image style={styles.cancelButton} source={require('../../../assets/images/close.png')} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.pickImageButtonContainer} onPress={openLibraryImage}>
-                <Image source={require('../../../assets/images/qr-code-white.png')} style={{ height: 30, width: 30, marginRight: '5%' }} />
-                <Text style={styles.pickImageButtonText}>Chọn hình QR Code có sẵn</Text>
-            </TouchableOpacity>
             <View style={styles.topContent}>
-                <Text style={styles.topText}>Hướng camera về phía mã QR</Text>
+                <Text style={styles.topText}>Hướng camera về phía mã thanh toán</Text>
             </View>
         </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
+        flexDirection: 'column',
+        backgroundColor: 'black',
     },
     cameraContainer: {
         height: '100%',
@@ -186,4 +162,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default QRCodeScannerScreen;
+export default PaymentScanner;

@@ -26,7 +26,7 @@ const LookupScreen = ({ navigation }) => {
     }, []);
 
     const removeDiacritics = (str) => {
-        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     };
 
     const handleSearch = () => {
@@ -42,7 +42,7 @@ const LookupScreen = ({ navigation }) => {
         <SafeAreaView style={{ flex: 1, marginBottom: hp(8) }}>
             <View style={styles.container_heading}>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ justifyContent: 'flex-start', position: 'absolute', left: wp(4) }}>
-                    <Image source={require("../../../assets/images/back.png")} style={{ width: wp(4), height: wp(4) }} />
+                    <Image source={require('../../../assets/images/back.png')} style={{ width: wp(4), height: wp(4) }} />
                 </TouchableOpacity>
                 <View style={{ alignSelf: 'center' }}>
                     <Text style={styles.heading} numberOfLines={1}>Tra cứu chứng chỉ hành nghề bất động sản</Text>
@@ -54,7 +54,7 @@ const LookupScreen = ({ navigation }) => {
                     <Image source={require('../../../assets/images/iconmoigioiBDS.png')} style={styles.image} />
                     <Text style={styles.description}>Vui lòng nhập họ và tên để xem chứng chỉ môi giới bất động sản</Text>
                     <TextInput
-                        placeholder='Nhập từ khóa tìm kiếm'
+                        placeholder="Nhập từ khóa tìm kiếm"
                         style={styles.textInput}
                         onChangeText={text => {
                             setSearchText(text);
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
         fontSize: hp(2),
         textAlign: 'center',
         color: 'white',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     containerLookup: {
         backgroundColor: 'white',
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     description: {
         paddingHorizontal: '5%',
         fontSize: hp(2),
-        color: 'black'
+        color: 'black',
     },
     textInput: {
         alignItems: 'center',
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         fontSize: hp(2),
         borderWidth: 1,
-        borderColor: '#B0B0B0'
+        borderColor: '#B0B0B0',
 
     },
     searchButton: {
@@ -158,24 +158,24 @@ const styles = StyleSheet.create({
     searchButtonText: {
         color: '#FFFFFF',
         fontSize: hp(2),
-        padding: '1%'
+        padding: '1%',
     },
     resultsTitle: {
         marginHorizontal: '5%',
         marginTop: '4%',
         fontSize: hp(2),
-        color: 'black'
+        color: 'black',
     },
     resultsContainer: {
         marginHorizontal: '5%',
     },
     resultItem: {
-        marginBottom: '2%'
+        marginBottom: '2%',
     },
     resultText: {
         fontSize: hp(2),
         color: 'black',
-        marginBottom: '1%'
+        marginBottom: '1%',
     },
     noResultsText: {
         marginHorizontal: '5%',

@@ -26,7 +26,7 @@ function SearchAndCategory({ handleSearch, categoryList, onCategoryClick, active
           placeholderTextColor="gray"
           onChangeText={onChangeText}
           value={searchText}
-          clearButtonMode='always'
+          clearButtonMode="always"
         />
 
         <TouchableOpacity onPress={onSearchButtonPress}>
@@ -34,7 +34,7 @@ function SearchAndCategory({ handleSearch, categoryList, onCategoryClick, active
         </TouchableOpacity>
       </View>
 
-      <View style={{ marginHorizontal: "2%", height: hp(5) }}>
+      <View style={{ marginHorizontal: '2%', height: hp(5) }}>
         <FlatList
           data={categoryList}
           horizontal
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     // shadowOpacity: 0.25,
     // shadowRadius: 3.84,
     // elevation: 5,
-    height: hp(5)
+    height: hp(5),
   },
   searchIcon: {
     marginRight: 10,
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#C9C9C9',
-  }
+  },
 });
 
 export default SearchAndCategory;

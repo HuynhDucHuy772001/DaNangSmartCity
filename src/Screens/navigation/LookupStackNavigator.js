@@ -4,6 +4,7 @@ import LookupScreen from '../Lookup/BDS/LookupScreen';
 import Lookup from '../Lookup/Lookup';
 import QRCodeScannerScreen from '../Lookup/ProfileStatus/QRCodeScannerScreen';
 import ProfileStatusScreen from '../Lookup/ProfileStatus/ProfileStatusScreen';
+import PaymentScanner from '../Lookup/ProfileStatus/PaymentScanner';
 
 const Stack = createStackNavigator();
 
@@ -26,8 +27,13 @@ export default function LookupStackNavigator() {
                 options={{ headerShown: false }}
             />
             <Stack.Screen
-                name="QRCodeScannerScreen"
+                name="qrcodescannerscreen"
                 component={QRCodeScannerScreen}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="paymentscanner"
+                component={PaymentScanner}
                 options={{ headerShown: false }}
             />
         </Stack.Navigator>

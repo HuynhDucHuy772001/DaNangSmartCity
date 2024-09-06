@@ -203,7 +203,7 @@ const markdownStyles = StyleSheet.create({
     body: {
         marginHorizontal: '2.5%',
         fontSize: hp(2.1),
-        color: 'black'
+        color: 'black',
     },
 });
 
@@ -214,14 +214,14 @@ const styles = StyleSheet.create({
         borderRadius: theme.radius.xs,
         width: 45,
         marginTop: '2%',
-        marginLeft: '2%'
+        marginLeft: '2%',
     },
     ten_su_kien: {
         fontSize: hp(2.8),
         textTransform: 'uppercase',
         margin: '2%',
         color: 'black',
-        fontFamily: "Inter-Black"
+        fontFamily: 'Inter-Black',
     },
     container_thoi_gian_dien_ra_su_kien: {
         display: 'flex',
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
         marginHorizontal: '2%',
         fontSize: hp(2),
         fontStyle: 'italic',
-        color: 'black'
+        color: 'black',
     },
     directionButton: {
         width: 'auto',
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
         marginHorizontal: '2%',
         fontSize: hp(1.7),
         fontStyle: 'italic',
-        color: 'black'
+        color: 'black',
     },
     markdownImage: {
         width: wp(96),
@@ -302,8 +302,8 @@ const styles = StyleSheet.create({
     },
     closeButton: {
         position: 'absolute',
-        top: "8%",
-        right: "6%",
+        top: '8%',
+        right: '6%',
     },
 });
 

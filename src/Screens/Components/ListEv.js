@@ -47,9 +47,9 @@ function ListEv({ dataEv, loading, onRefresh }) {
                 <Image
                   source={{ uri: item.hinh_anh }}
                   style={{ height: '100%', width: '90%', borderRadius: theme.radius.xx }}
-                  resizeMode='cover'
+                  resizeMode="cover"
                 />
-                {item.gia_ve.loai_gia_ve == 'Miễn phí' ? (
+                {item.gia_ve.loai_gia_ve === 'Miễn phí' ? (
                   <View style={styles.directionButton}>
                     {/* <Image source={require('../../assets/ticket.png')} style={{ height: wp(9), width: wp(9) }} /> */}
                     <Text style={styles.textTicket}>{item.gia_ve.loai_gia_ve}</Text>
@@ -103,14 +103,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   content_list: {
     display: 'flex',
     flexDirection: 'row',
     flex: 1,
-    marginVertical: "2%",
-    marginHorizontal: "2%",
+    marginVertical: '2%',
+    marginHorizontal: '2%',
     // backgroundColor: theme.colors.white,
     // borderRadius: theme.radius.xx,
     // shadowColor: '#000',
@@ -121,21 +121,21 @@ const styles = StyleSheet.create({
     // shadowOpacity: 0.25,
     // shadowRadius: 3.84,
     // elevation: 5,
-    width: wp(96.5)
+    width: wp(96.5),
   },
   textTicket: {
     fontSize: hp(1.8),
     color: 'black',
     alignSelf: 'center',
-    fontWeight: '500'
+    fontWeight: '500',
   },
   textNameEvent: {
     color: 'black',
     marginLeft: '3%',
     width: wp(65),
     fontSize: hp(1.9),
-    marginVertical: "2%",
-    fontFamily: "Inter-ExtraBold"
+    marginVertical: '2%',
+    fontFamily: 'Inter-ExtraBold',
   },
   viewThoiGianSuKien: {
     display: 'flex',
@@ -159,10 +159,9 @@ const styles = StyleSheet.create({
     color: 'black',
     marginLeft: '2%',
     width: wp(56),
-    fontSize: 14,
-    marginBottom: "1%",
+    marginBottom: '1%',
     fontSize: hp(1.8),
-    fontFamily: 'Inter-Medium'
+    fontFamily: 'Inter-Medium',
   },
   directionButton: {
     position: 'absolute',
@@ -172,7 +171,7 @@ const styles = StyleSheet.create({
     borderRadius: theme.radius.xx,
     borderWidth: 2,
     borderColor: theme.colors.grayBG,
-    marginTop: "10%",
+    marginTop: '10%',
   },
 });
 

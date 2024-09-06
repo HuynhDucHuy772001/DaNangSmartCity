@@ -17,7 +17,8 @@ function getTabBarVisibility(route) {
     return !(routeName === 'listview' || routeName === 'detailview' ||
         routeName === 'weatherscreen' || routeName === 'BDS' ||
         routeName === 'listevents' || routeName === 'eventdetail' ||
-        routeName === 'profilestatus' || routeName === 'QRCodeScannerScreen'
+        routeName === 'profilestatus' || routeName === 'qrcodescannerscreen' ||
+        routeName === 'paymentscanner'
     );
 }
 
@@ -43,87 +44,87 @@ export default function TabNavigator() {
                     title: "Trang chủ",
                     tabBarIcon: ({ focused, color }) => (
                         <Image
-                            source={require("../../assets/images/home.png")}
+                            source={require('../../assets/images/home.png')}
                             style={{ height: hp(4.6), width: hp(4.6), tintColor: color }}
                         />
                     ),
                     tabBarLabelStyle: {
                         fontSize: hp(2),
-                        marginBottom: "5%"
+                        marginBottom: '5%',
                     },
-                    tabBarActiveTintColor: theme.colors.main
+                    tabBarActiveTintColor: theme.colors.main,
                 }}
             />
             <Tab.Screen
                 name="Discover"
                 component={Discover}
                 options={{
-                    title: "Khám phá",
+                    title: 'Khám phá',
                     tabBarIcon: ({ focused, color }) => (
                         <Image
-                            source={require("../../assets/images/4-rounded-squares.png")}
+                            source={require('../../assets/images/4-rounded-squares.png')}
                             style={{ height: hp(3.5), width: hp(3.5), tintColor: color }}
                         />
                     ),
                     tabBarLabelStyle: {
                         fontSize: hp(2),
-                        marginBottom: "5%"
+                        marginBottom: '5%',
                     },
-                    tabBarActiveTintColor: theme.colors.main
+                    tabBarActiveTintColor: theme.colors.main,
                 }}
             />
             <Tab.Screen
                 name="Lookup"
                 component={LookupStackNavigator}
                 options={{
-                    title: "Tra cứu",
+                    title: 'Tra cứu',
                     tabBarIcon: ({ focused, color }) => (
                         <Image
-                            source={require("../../assets/images/search1.png")}
+                            source={require('../../assets/images/search1.png')}
                             style={{ height: hp(4.6), width: hp(4.6), tintColor: color }}
                         />
                     ),
                     tabBarLabelStyle: {
                         fontSize: hp(2),
-                        marginBottom: "5%"
+                        marginBottom: '5%',
                     },
-                    tabBarActiveTintColor: theme.colors.main
+                    tabBarActiveTintColor: theme.colors.main,
                 }}
             />
             <Tab.Screen
-                name="Introduction"
+                name='Introduction'
                 component={Introduction}
                 options={{
-                    title: "Giới thiệu",
+                    title: 'Giới thiệu',
                     tabBarIcon: ({ focused, color }) => (
                         <Image
-                            source={require("../../assets/images/link.png")}
+                            source={require('../../assets/images/link.png')}
                             style={{ height: hp(4.4), width: hp(4.4), tintColor: color }}
                         />
                     ),
                     tabBarLabelStyle: {
                         fontSize: hp(2),
-                        marginBottom: "5%"
+                        marginBottom: '5%',
                     },
-                    tabBarActiveTintColor: theme.colors.main
+                    tabBarActiveTintColor: theme.colors.main,
                 }}
             />
             <Tab.Screen
-                name="Account"
+                name='Account'
                 component={Account}
                 options={{
-                    title: "Tài khoản",
+                    title: 'Tài khoản',
                     tabBarIcon: ({ focused, color }) => (
                         <Image
-                            source={require("../../assets/images/account.png")}
+                            source={require('../../assets/images/account.png')}
                             style={{ height: hp(4.6), width: hp(4.6), tintColor: color }}
                         />
                     ),
                     tabBarLabelStyle: {
                         fontSize: hp(2),
-                        marginBottom: "5%"
+                        marginBottom: '5%',
                     },
-                    tabBarActiveTintColor: theme.colors.main
+                    tabBarActiveTintColor: theme.colors.main,
                 }}
             />
         </Tab.Navigator>

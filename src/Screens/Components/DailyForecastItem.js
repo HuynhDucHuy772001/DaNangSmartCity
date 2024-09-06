@@ -6,7 +6,7 @@ import { hp, wp } from '../../helpers/common';
 const DailyForecastItem = ({ item, index, convertFtoC }) => {
     const formatDate = (timestamp) => {
         const date = new Date(timestamp * 1000);
-        const daysOfWeek = ["CN", "Th 2", "Th 3", "Th 4", "Th 5", "Th 6", "Th 7"];
+        const daysOfWeek = ['CN', 'Th 2', 'Th 3', 'Th 4', 'Th 5', 'Th 6', 'Th 7'];
         const today = new Date();
         if (date.toDateString() === today.toDateString()) {
             return 'Hôm nay';
@@ -32,7 +32,7 @@ const DailyForecastItem = ({ item, index, convertFtoC }) => {
 
 const styles = StyleSheet.create({
     itemContainer: {
-        paddingHorizontal: '8.5%'
+        paddingHorizontal: '8.5%',
     },
     container: {
         flexDirection: 'row',
@@ -47,23 +47,23 @@ const styles = StyleSheet.create({
         fontSize: hp(2),
         color: 'white',
         fontFamily: 'Inter-SemiBold',
-        width: '25%'
+        width: '25%',
     },
     icon: {
         height: wp(10),
-        width: wp(14)
+        width: wp(14),
     },
     tempmin: {
         fontSize: hp(2),
         color: 'white',
         fontFamily: 'Inter-SemiBold',
-        paddingLeft: '12%'
+        paddingLeft: '12%',
     },
     tempmax: {
         fontSize: hp(2),
         color: 'white',
         fontFamily: 'Inter-SemiBold',
-        paddingLeft: '25%'
+        paddingLeft: '25%',
     },
 
 });

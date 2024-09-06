@@ -22,7 +22,7 @@ const SearchBar = ({ selectedCategory, setSelectedCategory, setSearchText, handl
 
     return (
         <View style={styles.container}>
-            <Text style={{ fontSize: hp(2.2), fontWeight: theme.fontWeights.medium, color: "black" }}>Tra cứu theo</Text>
+            <Text style={{ fontSize: hp(2.2), fontWeight: theme.fontWeights.medium, color: 'black' }}>Tra cứu theo</Text>
             <View style={styles.searchContainer}>
                 <RNPickerSelect
                     value={selectedCategory}
@@ -45,7 +45,7 @@ const SearchBar = ({ selectedCategory, setSelectedCategory, setSearchText, handl
                     />
 
                     <TouchableOpacity onPress={onSearchButtonPress}>
-                        <Image source={require("../../assets/images/search.png")} style={{ alignSelf: "flex-end" }} />
+                        <Image source={require('../../assets/images/search.png')} style={{ alignSelf: 'flex-end' }} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: 'white',
         width: wp(96),
-        marginHorizontal: "2%",
-        paddingVertical: "2%"
+        marginHorizontal: '2%',
+        paddingVertical: '2%',
     },
     searchContainer: {
         flexDirection: 'row',
@@ -81,9 +81,9 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-        marginLeft: "2%",
+        marginLeft: '2%',
         width: wp(64),
-        height: hp(6)
+        height: hp(6),
     },
     input: {
         flex: 1,
@@ -114,7 +114,7 @@ const pickerSelectStyles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 5,
         width: wp(30),
-        color: "black",
+        color: 'black',
     },
 });
 
