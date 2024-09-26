@@ -1,14 +1,13 @@
 export const theme = {
     colors: {
-        main: "#00A3FF",
+        main: '#00A3FF',
         white: '#fff',
         black: '#000',
         grayBG: '#e5e5e5',
         // neutral
         neutral: (opacity) => `rgba(10, 10, 10, ${opacity})`,
         neutralW: (opacity) => `rgba(255, 255, 255, ${opacity})`,
-
-
+        neutralBlue: (opacity) => `rgba(0, 163, 255, ${opacity})`,
     },
     fontWeights: {
         medium: '500',

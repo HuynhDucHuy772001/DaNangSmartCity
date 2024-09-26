@@ -234,7 +234,7 @@ const Home = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     heading: {
-        width: wp(94),
+        // width: wp(94),
         flexDirection: 'row',
         marginVertical: '2%',
         marginHorizontal: '2%',

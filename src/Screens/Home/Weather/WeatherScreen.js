@@ -6,6 +6,8 @@ import DailyForecastItem from '../../Components/DailyForecastItem';
 import { theme } from '../../../constants/theme';
 import { useNavigation } from '@react-navigation/native';
 import Geolocation from '@react-native-community/geolocation';
+import LottieView from 'lottie-react-native';
+import { animated, useSpring } from '@react-spring/native';
 
 const API_KEY = "f5532ca263adae4d802d165345108817";
 const API_KEY_IQAIR = "ed52ab3d-0fbd-4b85-9494-cefc14914c3d";
@@ -115,10 +117,34 @@ const WeatherScreen = () => {
         );
     };
 
+    const AnimatedText = animated(Text);
+
+    const [props, set] = useSpring(() => ({
+        from: { opacity: 0.1 },
+        to: { opacity: 1 },
+        loop: { reverse: true },
+    }));
+
     if (loading) {
         return (
-            <View style={{ flex: 1, backgroundColor: theme.colors.neutralW(0.15), justifyContent: 'center' }}>
-                <ActivityIndicator size='large' color={theme.colors.main} />
+            <View style={styles.loadingContainer}>
+                <AnimatedText style={[
+                    props,
+                    {
+                        fontSize: hp(2.5),
+                        fontWeight: 'bold',
+                        color: 'white',
+                        textAlign: 'center',
+                    },
+                ]}>
+                    Đang tải dữ liệu thời tiết ...
+                </AnimatedText>
+                <LottieView
+                    source={require('../../../assets/animations/weather-loading')}
+                    autoPlay
+                    loop
+                    style={styles.lottieAnimation}
+                />
             </View>
         );
     }
@@ -667,6 +693,21 @@ const styles = StyleSheet.create({
         paddingHorizontal: '8%',
         fontFamily: 'Inter-Medium',
         paddingBottom: '2%',
+    },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: theme.colors.neutralBlue(0.6),
+    },
+    loadingText: {
+        fontSize: hp(2),
+        fontFamily: 'Inter-SemiBold',
+        color: 'white',
+    },
+    lottieAnimation: {
+        width: 350,
+        height: 350,
     },
 });
 

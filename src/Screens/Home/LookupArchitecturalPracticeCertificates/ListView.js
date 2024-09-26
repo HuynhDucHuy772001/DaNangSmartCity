@@ -131,7 +131,7 @@ const ListView = () => {
             )}
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container_heading: {
