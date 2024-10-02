@@ -42,9 +42,9 @@ const LookupScreen = ({ navigation }) => {
         <SafeAreaView style={{ flex: 1, marginBottom: hp(8) }}>
             <View style={styles.container_heading}>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ justifyContent: 'flex-start', position: 'absolute', left: wp(4) }}>
-                    <Image source={require('../../../assets/images/back.png')} style={{ width: wp(4), height: wp(4) }} />
+                    <Image source={require('../../../assets/images/back.png')} style={{ width: wp(5), height: wp(5) }} />
                 </TouchableOpacity>
-                <View style={{ alignSelf: 'center' }}>
+                <View style={{ width: wp(75), alignSelf: 'center' }}>
                     <Text style={styles.heading} numberOfLines={1}>Tra cứu chứng chỉ hành nghề bất động sản</Text>
                 </View>
             </View>
@@ -55,6 +55,7 @@ const LookupScreen = ({ navigation }) => {
                     <Text style={styles.description}>Vui lòng nhập họ và tên để xem chứng chỉ môi giới bất động sản</Text>
                     <TextInput
                         placeholder="Nhập từ khóa tìm kiếm"
+                        // placeholderTextColor='black'
                         style={styles.textInput}
                         onChangeText={text => {
                             setSearchText(text);

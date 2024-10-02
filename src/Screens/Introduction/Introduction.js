@@ -4,7 +4,7 @@ import { Text, View } from 'react-native';
 const Introduction = () => {
     return (
         <View style={{ flex: 1, justifyContent: 'center' }}>
-            <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 16 }}>Giới thiệu</Text>
+            <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 16, color: 'black' }}>Giới thiệu</Text>
         </View>
     );
 }

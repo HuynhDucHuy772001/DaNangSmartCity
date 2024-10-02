@@ -312,7 +312,7 @@ const styles = StyleSheet.create({
     },
     noDataText: {
         fontSize: hp(2),
-        color: theme.colors.gray,
+        color: 'black',
         textAlign: 'center',
         backgroundColor: 'white',
         height: '100%',

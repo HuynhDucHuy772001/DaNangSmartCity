@@ -2,7 +2,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import Home from '../Home/Home';
 import ListView from '../Home/LookupArchitecturalPracticeCertificates/ListView';
-import DetailView from '../Home/LookupArchitecturalPracticeCertificates/DetailView';
 import WeatherScreen from '../Home/Weather/WeatherScreen';
 import ListEvents from '../Home/Events/ListEvents';
 import EventDetail from '../Home/Events/EventDetail';
@@ -20,11 +19,6 @@ export default function HomeStackNavigator() {
             <Stack.Screen
                 name="listview"
                 component={ListView}
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name="detailview"
-                component={DetailView}
                 options={{ headerShown: false }}
             />
             <Stack.Screen

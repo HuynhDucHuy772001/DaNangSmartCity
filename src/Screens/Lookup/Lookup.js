@@ -18,13 +18,13 @@ const Lookup = ({ navigation }) => {
         {
             icon: require('../../assets/images/iconmoigioiBDS.png'),
             text: 'Tra cứu chứng chỉ hành nghề bất động sản',
-            onPress: () => navigation.navigate('BDS')
+            onPress: () => navigation.navigate('BDS'),
         },
         {
             icon: require('../../assets/images/clipboard.png'),
             text: 'Tra cứu thông tin tình trạng hồ sơ',
-            onPress: () => navigation.navigate('profilestatus')
-        }
+            onPress: () => navigation.navigate('profilestatus'),
+        },
     ];
 
     return (
@@ -42,7 +42,7 @@ const Lookup = ({ navigation }) => {
             </ScrollView>
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -81,11 +81,13 @@ const styles = StyleSheet.create({
     optionIcon: {
         height: wp(8),
         width: wp(8),
+        color: 'black',
     },
     textUtilities: {
         fontSize: hp(1.8),
         paddingLeft: '2%',
         flex: 1,
+        color: 'black',
     },
     nextIcon: {
         alignSelf: 'center',

@@ -1,8 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { fetchDataFromAPI } from '../../../API/api';
-import ChildListView from '../../Components/ChildListView';
 import SearchBar from '../../Components/SearchBar';
 import { hp, wp } from '../../../helpers/common';
 import MultiSelectUni from '../../Components/MultiSelectUni';
@@ -13,22 +12,18 @@ const { height, width } = Dimensions.get('window');
 const ListView = () => {
     const navigation = useNavigation();
     const [data, setData] = useState([]);
-    const [originData, setOriginData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [filterDataAll, setFilteredDataAll] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('ho_va_ten');
     const [searchText, setSearchText] = useState('');
     const [selectedUniversities, setSelectedUniversities] = useState([]);
-    const [refreshing, setRefreshing] = useState(false);
+    const [hasSearched, setHasSearched] = useState(false);
 
     const fetchData = async () => {
         try {
             const apiData = await fetchDataFromAPI();
             setData(apiData); // Cập nhật dữ liệu hiện tại
-            setOriginData(apiData); // Cập nhật dữ liệu gốc
-            setIsLoading(false);
         } catch (error) {
             console.log('Lỗi khi gọi API:', error);
-            setIsLoading(false);
         }
     };
 
@@ -45,7 +40,7 @@ const ListView = () => {
     };
 
     const filterInfor = () => {
-        let filteredData = originData;
+        let filteredData = data;
 
         if (searchText || selectedUniversities.length > 0) {
             filteredData = filteredData.filter(item => {
@@ -73,8 +68,9 @@ const ListView = () => {
 
                 return matchesSearchText && matchesUniversity;
             });
+            setHasSearched(true);
+            setFilteredDataAll(filteredData);
         }
-        setData(filteredData);
     };
 
     useEffect(() => {
@@ -87,12 +83,13 @@ const ListView = () => {
         { label: 'Đại học Bách khoa Đà Nẵng', value: 'Đại học Bách khoa Đà Nẵng' }
     ];
 
-    const onRefresh = () => {
-        setRefreshing(true);
-        fetchData();
-        setRefreshing(false);
-        setSearchText('');
-    }
+    const formatDate = (timestamp) => {
+        const date = new Date(timestamp);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    };
 
     const formatCCCD = (cccd) => {
         const start = cccd.slice(0, 2);
@@ -122,12 +119,44 @@ const ListView = () => {
 
             <MultiSelectUni university={university} setSelectedUniversities={setSelectedUniversities} />
 
-            {isLoading ? (
+            {/* {isLoading ? (
                 <ActivityIndicator size="large" color={theme.colors.main} style={{ marginTop: '50%' }} />
             ) : data.length === 0 ? (
                 <Text style={styles.noDataText}>Không có thông tin bạn cần tìm kiếm</Text>
             ) : (
                 <ChildListView data={data} loading={isLoading} refreshing={refreshing} onRefresh={onRefresh} formatCCCD={formatCCCD} />
+            )} */}
+
+            {filterDataAll.length > 0 ? (
+                <ScrollView>
+                    <Text style={styles.resultsTitle}>Kết quả tìm kiếm:</Text>
+                    <View style={styles.resultsContainer}>
+                        {filterDataAll.map((item, index) => (
+                            <View key={index} style={styles.resultItem}>
+                                <Text style={styles.resultText}>({index + 1}) Họ và tên: {item.ho_va_ten}</Text>
+                                <Text style={styles.resultText}>Ngày sinh: {formatDate(item.ngay_thang_nam_sinh)}</Text>
+                                <Text style={styles.resultText}>CCCD/CMND: {formatCCCD(item.so_cmnd_cccd)}</Text>
+                                <Text style={styles.resultText}>Trình độ chuyên môn: {item.trinh_do_chuyen_mon}</Text>
+                                <Text style={styles.resultText}>Lĩnh vực cấp CCHN: {item.linh_vuc_cap_cchn}</Text>
+                                <Text style={styles.resultText}>Đơn vị công tác: {item.don_vi_cong_tac}</Text>
+                                <Text style={styles.resultText}>Trường đào tạo: {item.truong_dao_tao}</Text>
+                                <Text style={styles.resultText}>Hệ đào tạo: {item.he_dao_tao}</Text>
+                                <Text style={styles.resultText}>Ghi chú: {item.ghi_chu}</Text>
+                            </View>
+                        ))}
+                    </View>
+                </ScrollView>
+            ) : (
+                hasSearched ? (
+                    <View>
+                        <Text style={styles.resultsTitle}>Kết quả tìm kiếm:</Text>
+                        <Text style={styles.noResultsText}>Không có kết quả. Vui lòng thử lại hoặc liên hệ Tổng đài 0236 1022 (*1022) để được hỗ trợ</Text>
+                    </View>
+                ) : (
+                    <View>
+                        <Text style={styles.resultsTitle}>Nhập thông tin ở phía trên để tìm kiếm</Text>
+                    </View>
+                )
             )}
         </View>
     );
@@ -144,22 +173,35 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '100%',
     },
-
     heading: {
         fontSize: hp(2),
         fontWeight: theme.fontWeights.semibold,
         color: theme.colors.white,
         textAlign: 'center',
     },
-
-    noDataText: {
-        fontSize: 16,
-        color: theme.colors.gray,
-        textAlign: 'center',
-        backgroundColor: 'white',
-        height: hp(100),
-        paddingTop: '50%',
-        fontStyle: 'italic',
+    resultsTitle: {
+        marginHorizontal: '5%',
+        marginTop: '4%',
+        fontSize: hp(2),
+        color: 'black',
+    },
+    resultsContainer: {
+        marginHorizontal: '5%',
+    },
+    resultItem: {
+        marginBottom: '2%',
+    },
+    resultText: {
+        fontSize: hp(2),
+        color: 'black',
+        marginBottom: '1%',
+    },
+    noResultsText: {
+        marginHorizontal: '5%',
+        marginTop: '1%',
+        marginBottom: '4%',
+        fontSize: hp(2),
+        color: 'black',
     },
 });
 
