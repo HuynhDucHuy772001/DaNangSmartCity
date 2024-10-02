@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { ActivityIndicator, Image, ImageBackground, Linking, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Modal, StatusBar, } from 'react-native';
+import { ActivityIndicator, Image, ImageBackground, Linking, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Modal, StatusBar, VirtualizedList, } from 'react-native';
 import { theme } from '../../../constants/theme';
 import { Dimensions } from 'react-native';
 import Markdown from 'react-native-markdown-display';
@@ -164,15 +164,21 @@ function EventDetail() {
 
                         <View style={{ flexDirection: 'row' }}>
                             <TouchableOpacity onPress={() => Linking.openURL(`tel:${event.don_vi_to_chuc.thong_tin_lien_he.sdt}`)}>
-                                <Text style={{ color: 'black', fontSize: hp(2), textDecorationLine: 'underline' }}>
-                                    {event.don_vi_to_chuc.thong_tin_lien_he.sdt}
-                                </Text>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Image source={require('../../../assets/images/telephone.png')} style={{ alignSelf: 'center', marginRight: "1%" }} />
+                                    <Text style={{ color: 'black', fontSize: hp(2), textDecorationLine: 'underline' }}>
+                                        {event.don_vi_to_chuc.thong_tin_lien_he.sdt}
+                                    </Text>
+                                </View>
                             </TouchableOpacity>
                             <Text style={{ fontSize: hp(2) }}> - </Text>
                             <TouchableOpacity onPress={() => Linking.openURL(event.don_vi_to_chuc.thong_tin_lien_he.website)}>
-                                <Text style={{ color: 'black', fontSize: hp(2), textDecorationLine: 'underline' }}>
-                                    {event.don_vi_to_chuc.thong_tin_lien_he.website}
-                                </Text>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Image source={require('../../../assets/images/internet.png')} style={{ alignSelf: 'center', marginRight: "1%" }} />
+                                    <Text style={{ color: 'black', fontSize: hp(2), textDecorationLine: 'underline' }}>
+                                        {event.don_vi_to_chuc.thong_tin_lien_he.website}
+                                    </Text>
+                                </View>
                             </TouchableOpacity>
                         </View>
                     </View>
