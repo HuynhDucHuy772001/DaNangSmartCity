@@ -36,7 +36,7 @@ export async function fetchDataBDSFromAPI() {
     }
 }
 
-const urlEvents = 'https://apisukien.1022.vn/api/get';
+const urlEvents = 'https://web-lichsukien.onrender.com/api/get';
 
 export async function fetchDataEventsFromAPI() {
     try {
