@@ -26,6 +26,12 @@ function ListEv({ dataEv, loading, onRefresh }) {
     return `${dayOfWeek}, ${day < 10 ? '0' : ''}${day}/${month < 10 ? '0' : ''}${month}/${year}`;
   };
 
+  // Sắp xếp các sự kiện theo ngày
+  const sortedDataEv = dataEv.sort((a, b) => {
+    const dateA = moment(a.ngay_dien_ra_su_kien);
+    const dateB = moment(b.ngay_dien_ra_su_kien);
+    return dateB.diff(dateA);
+  });
 
   return (
     <View style={styles.container}>
@@ -34,7 +40,7 @@ function ListEv({ dataEv, loading, onRefresh }) {
       ) : (
         <FlatList
           style={{ height: hp(100), width: wp(100), backgroundColor: "white" }}
-          data={dataEv}
+          data={sortedDataEv}
           renderItem={({ item, id }) => (
             <Animated.View
               entering={FadeInDown.delay(100).springify().damping(12)}
@@ -51,14 +57,9 @@ function ListEv({ dataEv, loading, onRefresh }) {
                 />
                 {item.gia_ve.loai_gia_ve === 'Miễn phí' ? (
                   <View style={styles.directionButton}>
-                    {/* <Image source={require('../../assets/ticket.png')} style={{ height: wp(9), width: wp(9) }} /> */}
                     <Text style={styles.textTicket}>{item.gia_ve.loai_gia_ve}</Text>
                   </View>
                 ) : (
-                  // <View style={styles.directionButton}>
-                  //   <Image source={require('../../assets/ticket.png')} style={{ height: wp(9), width: wp(9) }} />
-                  //   <Text style={styles.textTicket}>{item.gia_ve.so_tien}</Text>
-                  // </View>
                   null
                 )}
               </TouchableOpacity>
@@ -70,7 +71,7 @@ function ListEv({ dataEv, loading, onRefresh }) {
                 <View style={styles.viewThoiGianSuKien}>
                   <Image source={require('../../assets/images/calender.png')} style={{ height: wp(7), width: wp(7) }} />
                   <Text style={styles.info_text} numberOfLines={2}>
-                    {formatDate(item.ngay_dien_ra_su_kien)} • {item.thoi_gian_dien_ra_su_kien}
+                    {formatDate(item.ngay_dien_ra_su_kien)} • Bấm vào để xem thời gian chi tiết
                   </Text>
                 </View>
 

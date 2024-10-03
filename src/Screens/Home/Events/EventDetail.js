@@ -95,10 +95,14 @@ function EventDetail() {
                     )}
 
                     <View style={styles.container_thoi_gian_dien_ra_su_kien}>
-                        <Image source={require('../../../assets/images/calender.png')} style={{ height: wp(10), width: wp(10) }} />
-                        <Text style={styles.thoi_gian_dien_ra_su_kien}>
-                            {formatDate(event.ngay_dien_ra_su_kien)} • {event.thoi_gian_dien_ra_su_kien}
-                        </Text>
+                        <Image source={require('../../../assets/images/calender.png')} style={{ height: wp(10), width: wp(10), alignSelf: 'center' }} />
+                        <View>
+                            <Text style={styles.thoi_gian_dien_ra_su_kien}>
+                                {formatDate(event.ngay_dien_ra_su_kien)}
+                            </Text>
+                            <Text style={styles.thoi_gian_dien_ra_su_kien_title}>Thời gian chi tiết:</Text>
+                            <Text style={styles.thoi_gian_dien_ra_su_kien}>{event.thoi_gian_dien_ra_su_kien}</Text>
+                        </View>
                     </View>
 
                     <View style={styles.container_dia_diem}>
@@ -135,17 +139,21 @@ function EventDetail() {
                         <Text style={styles.dang_cap_nhat}>Đang cập nhật...</Text>
                     )}
 
-                    <View style={{ alignSelf: 'flex-end', flexDirection: 'row', marginRight: '5%', marginBottom: '2%' }}>
-                        <Text style={{ fontSize: hp(2), color: 'black' }}>Nguồn: </Text>
-                        <TouchableOpacity onPress={handleLinkPress}>
-                            <Text numberOfLines={1} style={{ color: theme.colors.main, fontSize: hp(2), width: wp(30) }}>
-                                {event.nguon}
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
+                    {event.nguon ? (
+                        <View style={{ alignSelf: 'flex-end', flexDirection: 'row', marginRight: '5%', marginBottom: '2%' }}>
+                            <Text style={{ fontSize: hp(2), color: 'black' }}>Nguồn: </Text>
+                            <TouchableOpacity onPress={handleLinkPress}>
+                                <Text numberOfLines={1} style={{ color: theme.colors.main, fontSize: hp(2), width: wp(30) }}>
+                                    {event.nguon}
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    ) : (
+                        null
+                    )}
 
-                    <View style={{ alignItems: 'center' }}>
-                        <Text style={{ fontSize: hp(2), color: 'black' }}>Thông tin đơn vị tổ chức</Text>
+                    <View style={{ alignItems: 'center', marginHorizontal: '2%' }}>
+                        <Text style={{ fontSize: hp(2), color: 'black', fontWeight: '700' }}>Thông tin đơn vị tổ chức</Text>
                         {event.don_vi_to_chuc.logo ? (
                             <View style={{ flex: 1, flexDirection: 'row' }}>
                                 <Image
@@ -156,31 +164,43 @@ function EventDetail() {
                                     }}
                                     resizeMode="stretch"
                                 />
-                                <Text style={{ alignSelf: 'center', fontSize: hp(2), color: 'black' }}> {event.don_vi_to_chuc.ten}</Text>
                             </View>
+                        ) : (
+                            null
+                        )}
+
+                        {event.don_vi_to_chuc.ten ? (
+                            <Text style={{ fontSize: hp(2), color: 'black', textAlign: 'center' }}>{event.don_vi_to_chuc.ten}</Text>
+
                         ) : (
                             <Text style={styles.dang_cap_nhat_tt}>Đang cập nhật...</Text>
                         )}
 
-                        <View style={{ flexDirection: 'row' }}>
-                            <TouchableOpacity onPress={() => Linking.openURL(`tel:${event.don_vi_to_chuc.thong_tin_lien_he.sdt}`)}>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Image source={require('../../../assets/images/telephone.png')} style={{ alignSelf: 'center', marginRight: "1%" }} />
-                                    <Text style={{ color: 'black', fontSize: hp(2), textDecorationLine: 'underline' }}>
-                                        {event.don_vi_to_chuc.thong_tin_lien_he.sdt}
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                            <Text style={{ fontSize: hp(2) }}> - </Text>
-                            <TouchableOpacity onPress={() => Linking.openURL(event.don_vi_to_chuc.thong_tin_lien_he.website)}>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Image source={require('../../../assets/images/internet.png')} style={{ alignSelf: 'center', marginRight: "1%" }} />
-                                    <Text style={{ color: 'black', fontSize: hp(2), textDecorationLine: 'underline' }}>
-                                        {event.don_vi_to_chuc.thong_tin_lien_he.website}
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        </View>
+
+
+                        {event.don_vi_to_chuc.thong_tin_lien_he.sdt || event.don_vi_to_chuc.thong_tin_lien_he.website ? (
+                            <View style={{ flexDirection: 'row', paddingVertical: 2 }}>
+                                <TouchableOpacity onPress={() => Linking.openURL(`tel:${event.don_vi_to_chuc.thong_tin_lien_he.sdt}`)}>
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <Image source={require('../../../assets/images/telephone.png')} style={{ alignSelf: 'center', marginRight: "1%" }} />
+                                        <Text style={{ color: 'black', fontSize: hp(2), textDecorationLine: 'underline' }}>
+                                            {event.don_vi_to_chuc.thong_tin_lien_he.sdt}
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
+                                <Text style={{ fontSize: hp(2) }}> - </Text>
+                                <TouchableOpacity onPress={() => Linking.openURL(event.don_vi_to_chuc.thong_tin_lien_he.website)}>
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <Image source={require('../../../assets/images/internet.png')} style={{ alignSelf: 'center', marginRight: "1%" }} />
+                                        <Text style={{ color: 'black', fontSize: hp(2), textDecorationLine: 'underline' }}>
+                                            {event.don_vi_to_chuc.thong_tin_lien_he.website}
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                        ) : (
+                            null
+                        )}
                     </View>
                 </Animated.View>
             </ScrollView>
@@ -223,7 +243,7 @@ const styles = StyleSheet.create({
         marginLeft: '2%',
     },
     ten_su_kien: {
-        fontSize: hp(2.8),
+        fontSize: hp(2.2),
         textTransform: 'uppercase',
         margin: '2%',
         color: 'black',
@@ -240,12 +260,21 @@ const styles = StyleSheet.create({
         color: 'black',
         marginHorizontal: '2%',
         alignSelf: 'center',
+        width: wp(80),
+    },
+    thoi_gian_dien_ra_su_kien_title: {
+        fontSize: hp(2),
+        color: 'black',
+        marginHorizontal: '2%',
+        alignSelf: 'center',
+        width: wp(80),
+        fontWeight: '500',
     },
     container_dia_diem: {
         display: 'flex',
         flexDirection: 'row',
         margin: '2%',
-        width: wp(96),
+        width: wp(80),
         alignItems: 'center',
     },
     dia_diem: {
