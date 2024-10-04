@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View, PermissionsAndroid, Platform, Alert } from 'react-native';
+import { FlatList, Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View, PermissionsAndroid, Platform, Alert } from 'react-native';
 import { hp, wp } from '../../../helpers/common';
 import HourlyForecastItem from '../../Components/HourlyForecastItem';
 import DailyForecastItem from '../../Components/DailyForecastItem';
@@ -234,10 +234,7 @@ const WeatherScreen = () => {
 
     return (
         <ImageBackground source={{ uri: backgroundImage }} style={styles.container} resizeMode="cover">
-            <View style={{
-                ...StyleSheet.absoluteFillObject,
-                backgroundColor: 'rgba(0,0,0,0.2)'
-            }}></View>
+            <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0,0.2)' }}></View>
             <View style={{ flexDirection: 'row', height: 'auto', width: wp(92) }}>
                 <View style={{ justifyContent: 'center', width: wp(14) }}>
                     <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>

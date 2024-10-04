@@ -55,7 +55,7 @@ const LookupScreen = ({ navigation }) => {
                     <Text style={styles.description}>Vui lòng nhập họ và tên để xem chứng chỉ môi giới bất động sản</Text>
                     <TextInput
                         placeholder="Nhập từ khóa tìm kiếm"
-                        // placeholderTextColor='black'
+                        placeholderTextColor="gray"
                         style={styles.textInput}
                         onChangeText={text => {
                             setSearchText(text);
@@ -147,6 +147,7 @@ const styles = StyleSheet.create({
         fontSize: hp(2),
         borderWidth: 1,
         borderColor: '#B0B0B0',
+        color: 'black',
 
     },
     searchButton: {

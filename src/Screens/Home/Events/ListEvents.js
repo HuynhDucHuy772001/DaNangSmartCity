@@ -31,10 +31,11 @@ function ListEvents() {
         { id: 1, name: 'Tất cả' },
         { id: 2, name: 'Lễ hội truyền thống' },
         { id: 3, name: 'Thể thao' },
-        { id: 4, name: 'Văn hóa - Nghệ thuật' },
-        { id: 5, name: 'Chính trị - Ngoại giao' },
-        { id: 6, name: 'Hội thảo chuyên ngành' },
-        { id: 7, name: 'Khác' }
+        { id: 4, name: 'Vui chơi - Giải trí' },
+        { id: 5, name: 'Văn hóa - Nghệ thuật' },
+        { id: 6, name: 'Chính trị - Ngoại giao' },
+        { id: 7, name: 'Hội thảo chuyên ngành' },
+        { id: 8, name: 'Khác' }
     ], []);
 
     const costOptions = useMemo(() => [

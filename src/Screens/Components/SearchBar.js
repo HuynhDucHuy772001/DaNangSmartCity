@@ -40,6 +40,7 @@ const SearchBar = ({ selectedCategory, setSelectedCategory, setSearchText, handl
                     <TextInput
                         style={styles.input}
                         placeholder="Nhập thông tin tìm kiếm..."
+                        placeholderTextColor="gray"
                         value={searchText}
                         onChangeText={onChangeText}
                     />

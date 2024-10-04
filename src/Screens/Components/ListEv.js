@@ -70,9 +70,12 @@ function ListEv({ dataEv, loading, onRefresh }) {
 
                 <View style={styles.viewThoiGianSuKien}>
                   <Image source={require('../../assets/images/calender.png')} style={{ height: wp(7), width: wp(7) }} />
-                  <Text style={styles.info_text} numberOfLines={2}>
-                    {formatDate(item.ngay_dien_ra_su_kien)} • Bấm vào để xem thời gian chi tiết
-                  </Text>
+                  <View>
+                    <Text style={styles.info_text} numberOfLines={2}>
+                      {formatDate(item.ngay_dien_ra_su_kien)}
+                    </Text>
+                    <Text style={styles.info_text}>Bấm vào để xem thời gian chi tiết</Text>
+                  </View>
                 </View>
 
                 <View style={styles.viewDiaDiem_LinhVuc}>
