@@ -317,7 +317,7 @@ const WeatherScreen = () => {
                         <View style={styles.viewSunRise_SunSet}>
                             <View style={styles.viewSection2Row}>
                                 <Image source={require('../../../assets/images/sunset.png')} style={styles.iconTitle} />
-                                <Text style={styles.textTitle2Row}>MẶT TRỜI LẶN</Text>
+                                <Text style={styles.textTitle2Row}>MẶT TRờI LẶN</Text>
                             </View>
                             <Text style={styles.textSunRise_SunSet}>{formatTime(weatherDataCurrent.sys.sunset)}</Text>
                             <Text style={styles.textDetailSunRise_SunSet}>
@@ -328,7 +328,7 @@ const WeatherScreen = () => {
                         <View style={styles.viewSunRise_SunSet}>
                             <View style={styles.viewSection2Row}>
                                 <Image source={require('../../../assets/images/sunrise.png')} style={styles.iconTitle} />
-                                <Text style={styles.textTitle2Row}>MẶT TRỜI MỌC</Text>
+                                <Text style={styles.textTitle2Row}>MẶT TRờI MỌC</Text>
                             </View>
                             <Text style={styles.textSunRise_SunSet}>{formatTime(dailyWeatherForecastData[1].sunrise)}</Text>
                             <Text style={styles.textDetailSunRise_SunSet}>

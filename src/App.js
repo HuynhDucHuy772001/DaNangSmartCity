@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AppNavigator from "./Screens/navigation/AppNavigator";
 import { registerTranslation } from "react-native-paper-dates";
+import Orientation from 'react-native-orientation-locker';
+
 registerTranslation('en-GB', {
     save: 'Save',
     selectSingle: 'Select date',
@@ -21,5 +23,9 @@ registerTranslation('en-GB', {
 })
 
 export default function App() {
+    useEffect(() => {
+        Orientation.lockToPortrait();
+    }, []);
+
     return <AppNavigator />;
 }
